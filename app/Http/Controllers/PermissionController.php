@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission; // Ensure you have the correct namespace for Permission model
-//use Spatie\Permission\Models\Role; // If you need to use Role model as well
+
+// use Spatie\Permission\Models\Role; // If you need to use Role model as well
 
 class PermissionController extends Controller
 {
@@ -15,6 +16,7 @@ class PermissionController extends Controller
     {
         //
         $permissions = Permission::all();
+
         return view('', compact('permissions'));
     }
 

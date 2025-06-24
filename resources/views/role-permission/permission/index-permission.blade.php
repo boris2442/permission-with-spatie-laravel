@@ -13,7 +13,7 @@
             <div class="px-4 py-2 border-b dark:border-gray-600">
                 <h4 class="flex justify-between items-center text-black dark:text-white">
                     Permissions
-                    <a href="{{ url('permissions/create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+                    <a href="{{route('permissions.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
                         Add Permission
                     </a>
                 </h4>

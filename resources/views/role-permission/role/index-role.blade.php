@@ -12,9 +12,9 @@
         <div class="bg-white dark:bg-gray-800 shadow-md rounded mt-3">
             <div class="px-4 py-2 border-b dark:border-gray-600">
                 <h4 class="flex justify-between items-center text-black dark:text-white">
-                    Permissions
-                    <a href="{{route('permissions.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
-                        Add Permission
+                    Roles
+                    <a href="{{route('roles.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+                        Add Role
                     </a>
                 </h4>
             </div>
@@ -29,23 +29,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($permissions as $index => $permission)
+                        @foreach ($roles as $index => $role)
                         <tr
                             class="text-center {{ $index % 2 == 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-white dark:bg-gray-900' }}">
-                            <td class="border-b dark:border-gray-700 py-3">{{ $permission->id }}</td>
-                            <td class="border-b dark:border-gray-700">{{ $permission->name }}</td>
+                            <td class="border-b dark:border-gray-700 py-3">{{ $role->id }}</td>
+                            <td class="border-b dark:border-gray-700">{{ $role->name }}</td>
                             <td class="border-b dark:border-gray-700">
-                                <a href="{{ route('permissions.edit', $permission->id) }}"
+                                <a href="{{ route('roles.edit', $role->id) }}"
                                     class="bg-green-500 text-white px-2 py-1 rounded">
                                     Edit</a>
 
 
 
-                                <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST"
+                                <form action="{{ route('roles.destroy', $role->id) }}" method="POST"
                                     class="inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button href="{{ route('permissions.destroy', $permission->id) }}"
+                                    <button href="{{ route('roles.destroy', $role->id) }}"
                                         class="bg-red-500 text-white px-2 py-1 rounded mx-2"
                                         onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
                                         Delete

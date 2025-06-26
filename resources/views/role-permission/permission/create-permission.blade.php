@@ -24,15 +24,19 @@ text-white px-4 py-2 rounded">Back</a>
                         <form action="{{ route('permissions.store') }}" method="POST">
                             @csrf
                             <div class="mb-4">
-                                <label for="name" class="block text-sm font-medium text-gray-
-700">Permission
+                                <label for="name" class="block text-sm font-medium text-gray-700">Permission
                                     Name</label>
-                                <input type="text" id="name" name="name" class="mt-1 block w-full border-gray-300 rounded-md
-shadow-sm">
+                                <input type="text" id="name" name="name"
+                                    class="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+                                    value="{{ old('name') }}" required>
+
+                                @error('name')
+                                <span class="text-red-500 text-sm">{{ $message }}</span>
+                                @enderror
                             </div>
                             <button type="submit" class="bg-blue-500 text-white px-4 py-2
-rounded">Create
-                                Permission</button>
+rounded">Create Permission</button>
+
                         </form>
                     </div>
                 </div>

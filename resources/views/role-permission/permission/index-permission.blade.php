@@ -37,11 +37,23 @@
                             <td class="border-b dark:border-gray-700">
                                 <a href="{{ url('permissions/' . $permission->id . '/edit') }}"
                                     class="bg-green-500 text-white px-2 py-1 rounded">Edit</a>
-                                <a href="{{ url('permissions/' . $permission->id . '/delete') }}"
+
+                                {{-- <a href="{{ url('permissions/' . $permission->id . '/delete') }}"
                                     class="bg-red-500 text-white px-2 py-1 rounded mx-2"
                                     onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
                                     Delete
                                 </a>
+                                --}}
+                                <form action="{{ route('permissions.destroy', $permission->id) }}" method="POST"
+                                    class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button href="{{ route('permissions.destroy', $permission->id) }}"
+                                        class="bg-red-500 text-white px-2 py-1 rounded mx-2"
+                                        onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce produit ?');">
+                                        Delete
+                                    </button>
+                                </form>
                             </td>
                         </tr>
                         @endforeach

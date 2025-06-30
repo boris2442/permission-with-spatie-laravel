@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container mx-auto mt-5 flex justify-between items-center">
-        @include('role-permission.nav')
+        {{-- @include('role-permission.nav') --}}
         <button id="toggleDarkMode" class="bg-gray-800 text-white px-4 py-2 rounded">
             🌙 Mode Sombre
         </button>

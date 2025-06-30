@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="container mx-auto mt-5 flex justify-between items-center">
-        @include('role-permission.nav')
+        {{-- @include('role-permission.nav') --}}
         <button id="toggleDarkMode" class="bg-gray-800 text-white px-4 py-2 rounded">
             🌙 Mode Sombre
         </button>
@@ -35,6 +35,9 @@
                             <td class="border-b dark:border-gray-700 py-3">{{ $role->id }}</td>
                             <td class="border-b dark:border-gray-700">{{ $role->name }}</td>
                             <td class="border-b dark:border-gray-700">
+                                <a href="{{route('roles.addPermissionToRole', $role->id)}}"
+                                    class="bg-orange-400 text-white p-2 rounded"
+                                    >Add/ Edit permission</a>
                                 <a href="{{ route('roles.edit', $role->id) }}"
                                     class="bg-green-500 text-white px-2 py-1 rounded">
                                     Edit</a>

@@ -7,6 +7,7 @@ use App\Http\Controllers\RoleController;
 
 Route::resource('permissions', PermissionController::class);
 Route::resource('roles', RoleController::class); 
+Route::get('roles/{roleId}/give-permission', [RoleController::class, 'addPermissionToRole'])->name('roles.addPermissionToRole');
 Route::get('/', function () {
     return view('welcome');
 });

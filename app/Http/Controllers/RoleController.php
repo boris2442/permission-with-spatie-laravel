@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role; // Ensure you have the correct namespace for Role model
 use Spatie\Permission\Models\Permission;
@@ -87,13 +87,22 @@ class RoleController extends Controller
     }
 
      public function addPermissionToRole($roleId){
-        $role=Role::findOrFail($roleId);
+         $role=Role::findOrFail($roleId);
          $permissions=Permission::get();
          $rolePermissions=DB::table('role_has_permissions')
-         ->where('role_has_permissions.permission_id', $role->id)
+         ->where('role_has_permissions.role_id', $role->id)
          ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
          ->all();
 
         return view('role-permission.role.add-permissions', compact('role', 'permissions', 'rolePermissions'));
+    }
+
+    public function givePermissionToRole(Request $request, $roleId){
+        $request->validate([
+        'permission'=>'required',
+        ]);
+          $role=Role::findOrFail($roleId);
+          $role->syncPermissions($request->permission);
+        return redirect()->back()->with('success', 'Permissions add to roles');
     }
 }

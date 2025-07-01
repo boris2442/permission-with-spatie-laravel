@@ -20,7 +20,9 @@
             </div>
 
             <div class="p-4">
-               <form  method="POST">
+ <form  method="POST" action="{{ route('roles.givePermissionToRole', $role->id) }}">
+                @method('PATCH')
+                @csrf
    <label for="">Permissions</label>
    <div class='grid mt-5 grid-cols-3 gap-3 my-5'>
       @foreach($permissions as $permission)
@@ -29,11 +31,13 @@
         <input 
         type="checkbox"
         name="permission[]"
+       {{in_array($permission->id, $rolePermissions)? 'checked' : ''}} 
+       
         class=""
         id="permission"
         value="{{$permission->name}}"
         />
-        <span class='ml-2 text-gray-600'> Permission name</span>
+        <span class='ml-2 text-gray-600'> {{$permission->name}}</span>
     </div>
       @endforeach
    

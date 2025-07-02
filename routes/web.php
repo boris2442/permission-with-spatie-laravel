@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController; 
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PermissionController;
 
 Route::resource('permissions', PermissionController::class);
 Route::resource('roles', RoleController::class); 
@@ -24,5 +25,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('users/export/', [UsersController::class, 'export'])->name('users.export');
 require __DIR__ . '/auth.php';

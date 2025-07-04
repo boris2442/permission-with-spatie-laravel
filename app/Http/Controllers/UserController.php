@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
+
 class UserController extends Controller
 {
     /**
@@ -12,8 +14,8 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users=User::all();
-        return view('role-permission.users.index-user',[
+        $users = User::all();
+        return view('role-permission.users.index-user', [
             'users' => $users,
             // If you need roles, you can fetch them here as well
             // 'roles' => Role::all(),
@@ -26,10 +28,9 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('role-permission.users.create-user', [
-            // You can pass roles or other data if needed
-            // 'roles' => Role::all(),
-        ]);
+        $roles = Role::all();
+
+        return view('role-permission.users.create-user', compact('roles'));
     }
 
     /**
@@ -37,7 +38,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //unique:nom_table, nom_colonne, except_id
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+            'roles' => 'required',
+        ]);
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => bcrypt($request->password),
+        ]);
+        // if ($request->has('roles')) {
+        //     $user->assignRole($request->roles);
+        // }
+        $user->syncRoles($request->roles);
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
 
     /**

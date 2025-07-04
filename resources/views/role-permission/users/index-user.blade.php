@@ -37,13 +37,22 @@
                             <td class="border-b dark:border-gray-700 py-3">{{ $user->id }}</td>
                             <td class="border-b dark:border-gray-700">{{ $user->name }}</td>
                             <td class="border-b dark:border-gray-700">{{ $user->email }}</td>
-                            <td class="border-b dark:border-gray-700">-----</td>
-                            {{-- <td class="border-b dark:border-gray-700">{{ $user->role }}</td> --}}
+                            <td class="border-b dark:border-gray-700">
+                                @if ($user->roles->isEmpty())
+                                <span class="text-red-500">No roles assigned</span>
+                                @else
+                                @foreach ($user->roles as $role)
+                                <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">{{ $role->name }}</span>
+                                @endforeach
+                                @endif
+                            </td>
+                     
                             <td class="border-b dark:border-gray-700">
 
                                 <a href="{{ route('users.edit', $user->id) }}"
                                     class="bg-green-500 text-white px-2 py-1 rounded">
-                                    Edit</a>
+                                    Edit
+                                </a>
 
 
 

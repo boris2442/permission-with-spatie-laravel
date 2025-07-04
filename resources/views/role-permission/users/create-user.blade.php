@@ -8,7 +8,15 @@
 
     <div class="container mx-auto mt-6 dark:text-white dark:bg-gray-900">
         @include('role-permission.message')
+        {{-- Affichage des erreurs de validation, le cas échéant --}}
+        @if ($errors->any())
+        <ul class="bg-yellow-100 border border-yellow-400 text-yellow-700 px-4 py-3 rounded relative" role="alert">
 
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+        @endif
         <div class="bg-white dark:bg-gray-800 shadow-md rounded mt-3">
             <div class="px-4 py-2 border-b dark:border-gray-600">
                 <h4 class="flex justify-between items-center text-black dark:text-white">
@@ -63,9 +71,8 @@
                         <select name="roles[]" id="roles" multiple
                             class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:p-2">
                             @foreach($roles as $role)
-                            <option value="{{ $role->id }}"
-                               >
-                                {{ $role->name }}</option>
+                            <option value="{{ $role }}">
+                                {{ $role }}</option>
                             @endforeach
                         </select>
                         @error('roles')

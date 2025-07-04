@@ -28,7 +28,7 @@ class UserController extends Controller
     public function create()
     {
         //
-        $roles = Role::all();
+        $roles = Role::pluck('name')->all();
 
         return view('role-permission.users.create-user', compact('roles'));
     }
@@ -49,10 +49,9 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
+
         ]);
-        // if ($request->has('roles')) {
-        //     $user->assignRole($request->roles);
-        // }
+
         $user->syncRoles($request->roles);
         return redirect()->route('users.index')->with('success', 'User created successfully.');
     }

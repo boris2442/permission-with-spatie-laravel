@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\User;
 class UserController extends Controller
 {
     /**
@@ -12,7 +12,12 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view('role-permission.users.index-user');
+        $users=User::all();
+        return view('role-permission.users.index-user',[
+            'users' => $users,
+            // If you need roles, you can fetch them here as well
+            // 'roles' => Role::all(),
+        ]);
     }
 
     /**
@@ -21,6 +26,10 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('role-permission.users.create-user', [
+            // You can pass roles or other data if needed
+            // 'roles' => Role::all(),
+        ]);
     }
 
     /**

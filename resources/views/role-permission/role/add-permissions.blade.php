@@ -14,39 +14,38 @@
                 <h4 class="flex justify-between items-center text-black dark:text-white">
                     Roles : {{$role->name}}
                     <a href="{{route('roles.index') }}" class="bg-red-500 text-white px-4 py-2 rounded">
-                 Back To roles
+                        Back To roles
                     </a>
                 </h4>
             </div>
 
             <div class="p-4">
- <form  method="POST" action="{{ route('roles.givePermissionToRole', $role->id) }}">
-                @method('PATCH')
-                @csrf
-   <label for="">Permissions</label>
-   <div class='grid mt-5 grid-cols-3 gap-3 my-5'>
-      @foreach($permissions as $permission)
-    <div class='flex'>
-        <label for="permission"  class='flex' ></label>
-        <input 
-        type="checkbox"
-        name="permission[]"
-       {{in_array($permission->id, $rolePermissions)? 'checked' : ''}} 
-       
-        class=""
-        id="permission"
-        value="{{$permission->name}}"
-        />
-        <span class='ml-2 text-gray-600'> {{$permission->name}}</span>
-    </div>
-      @endforeach
-   
-</div>
+                <form method="POST" action="{{ route('roles.givePermissionToRole', $role->id) }}">
+                    @method('PATCH')
+                    @csrf
+                    <label for="">Permissions</label>
+                    <div class='grid mt-5 grid-cols-3 gap-3 my-5'>
+                        @foreach($permissions as $permission)
+                        <div class='flex'>
+                            <label for="permission" class='flex'></label>
+                            <input type="checkbox" name="permission[]" {{in_array($permission->id, $rolePermissions)?
+                            'checked' : ''}}
 
-      <button type="submit" href="{{route('roles.index') }}" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
-              Update
+                            class=""
+                            id="permission"
+                            value="{{$permission->name}}"
+                            />
+                            <span class='ml-2 text-gray-600'> {{$permission->name}}</span>
+                        </div>
+                        @endforeach
+
+                    </div>
+
+                    <button type="submit" href="{{route('roles.index') }}"
+                        class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+                        Update
                     </button>
-               </form>
+                </form>
             </div>
         </div>
     </div>

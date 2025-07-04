@@ -5,12 +5,16 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PermissionController;
-
+use App\Http\Controllers\UserController;
 Route::resource('permissions', PermissionController::class);
 Route::resource('roles', RoleController::class); 
 Route::get('roles/{roleId}/give-permission', [RoleController::class, 'addPermissionToRole'])->name('roles.addPermissionToRole');
 
 Route::patch('roles/{roleId}/give-permission', [RoleController::class, 'givePermissionToRole'])->name('roles.givePermissionToRole');
+Route::resource('users' ,UserController::class);
+
+
+
 
 Route::get('/', function () {
     return view('welcome');
